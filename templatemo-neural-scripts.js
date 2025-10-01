@@ -150,32 +150,52 @@ https://templatemo.com/tm-597-neural-glass
         setInterval(createQuantumParticle, 1500);
 
 // === Slider Script ===
-document.querySelectorAll('.feature-row').forEach(row => {
-  const slider = row.querySelector('.feature-visual.slider');
-  if (!slider) return; // skip rows without slider
+document.querySelectorAll(".feature-visual.slider").forEach((slider) => {
+  let slideIndex = 0;
+  const slides = slider.querySelectorAll(".slides > *"); 
+  const prev = slider.querySelector(".prev");
+  const next = slider.querySelector(".next");
 
-  const slides = slider.querySelector('.slides');
-  const images = slider.querySelectorAll('.slides img'); // ✅ FIXED
-  const dotsContainer = slider.querySelector('.dots');
-  let index = 0;
+  function showSlide(n) {
+    slides.forEach((slide, i) => {
+      slide.classList.remove("active");
+      slide.style.display = "none";
+      if (slide.tagName === "VIDEO") {
+        slide.pause();
+        slide.currentTime = 0;
+      }
+    });
 
-  // Create dots dynamically
-  images.forEach((_, i) => {
-    const dot = document.createElement('div');
-    dot.classList.add('dot');
-    if (i === 0) dot.classList.add('active');
-    dot.addEventListener('click', () => showSlide(i));
-    dotsContainer.appendChild(dot);
-  });
-  const dots = dotsContainer.querySelectorAll('.dot');
+    slides[n].classList.add("active");
+    slides[n].style.display = "block";
 
-  function showSlide(i) {
-    index = (i + images.length) % images.length;
-    slides.style.transform = `translateX(-${index * 100}%)`;
-    dots.forEach(dot => dot.classList.remove('active'));
-    dots[index].classList.add('active');
+    if (slides[n].tagName === "VIDEO") {
+      slides[n].play();
+    }
+
+    slideIndex = n;
   }
 
-  slider.querySelector('.prev').addEventListener('click', () => showSlide(index - 1));
-  slider.querySelector('.next').addEventListener('click', () => showSlide(index + 1));
+  function nextSlide() {
+    slideIndex = (slideIndex + 1) % slides.length;
+    showSlide(slideIndex);
+  }
+
+  function prevSlide() {
+    slideIndex = (slideIndex - 1 + slides.length) % slides.length;
+    showSlide(slideIndex);
+  }
+
+  if (next) next.addEventListener("click", nextSlide);
+  if (prev) prev.addEventListener("click", prevSlide);
+
+  // autoplay khusus video
+  slides.forEach((slide) => {
+    if (slide.tagName === "VIDEO") {
+      slide.addEventListener("ended", nextSlide);
+    }
+  });
+
+  // tampilkan pertama kali
+  showSlide(slideIndex);
 });

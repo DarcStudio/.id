@@ -115,13 +115,13 @@ Perkenalkan Kami Darc perusahaan kecil yang dibangun dari personal seorang freel
     <p>Ini adalah beberapa contoh project graphic design yang selama ini kami kerjakan untuk partnership kami berupa Launching Produk, Promo umkm, dll.</p>
   </div>
 
-  <div class="feature-visual slider glass">
-    <div class="slides">
-      <img src="images/GRAPHIC_DESIGN_1.png" alt="Slide 1" class="active">
-      <img src="images/GRAPHIC_DESIGN_2.png" alt="Slide 2">
-      <img src="images/GRAPHIC_DESIGN_3.png" alt="Slide 3">
-      <img src="images/GRAPHIC_DESIGN_4.png" alt="Slide 4">
-    </div>
+   <div class="feature-visual slider glass">
+<div class="slides">
+  <img src="images/GRAPHIC_DESIGN_1.png" alt="Slide 1" class="active">
+  <img src="images/GRAPHIC_DESIGN_2.png" alt="Slide 2">
+  <img src="images/GRAPHIC_DESIGN_3.png" alt="Slide 3">
+  <img src="images/GRAPHIC_DESIGN_4.png" alt="Slide 4">
+</div>
     <a class="prev">&#10094;</a>
     <a class="next">&#10095;</a>
     <div class="dots"></div>
@@ -129,55 +129,131 @@ Perkenalkan Kami Darc perusahaan kecil yang dibangun dari personal seorang freel
 </div>
 
 <!-- 🔹 Feature Row 2 -->
-<div class="feature-row">
-  <div class="feature-content">
-    <div class="feature-icon">♾️</div>
-    <h3>Motion Graphic</h3>
-    <p>Ini adalah perpaduan dari Project Graphic Design yang kami animasikan sehingga menjadi iklan yang kreatif dan inovatif.</p>
+  <div class="feature-row">
+    <div class="feature-content">
+      <div class="feature-icon">🎨</div>
+      <h3>Motion Graphic</h3>
+      <p>Ini adalah perpaduan dari Project Graphic Design yang kami animasikan sehingga menjadi iklan yang kreatif dan inovatif.</p>
+    </div>
+<div class="feature-visual slider glass motion-graphic-slider">
+  <div class="slides">
+    <video class="slide active" src="videos/Motion_Graphics_1.mp4" muted autoplay></video>
+    <video class="slide" src="videos/Motion_Graphics_2.mp4" muted></video>
+    <video class="slide" src="videos/Motion_Graphics_3.mp4" muted></video>
+    <video class="slide" src="videos/Motion_Graphics_4.mp4" muted></video>
+  </div>
+  <a class="prev">&#10094;</a>
+  <a class="next">&#10095;</a>
+  <div class="dots"></div>
+</div>
+
   </div>
 
+<script>
+document.querySelectorAll(".feature-visual.slider").forEach((slider) => {
+  let slideIndex = 0;
+  const slides = slider.querySelectorAll(".slides > *"); // bisa <video> atau <img>
+  const prev = slider.querySelector(".prev");
+  const next = slider.querySelector(".next");
+
+  function showSlide(n) {
+    slides.forEach((slide, i) => {
+      if (slide.tagName === "VIDEO") {
+        slide.pause();
+        slide.currentTime = 0;
+      }
+      slide.style.display = (i === n) ? "block" : "none";
+    });
+
+    if (slides[n].tagName === "VIDEO") {
+      slides[n].play();
+    }
+
+    slideIndex = n;
+  }
+
+  function nextSlide() {
+    slideIndex = (slideIndex + 1) % slides.length;
+    showSlide(slideIndex);
+  }
+
+  function prevSlide() {
+    slideIndex = (slideIndex - 1 + slides.length) % slides.length;
+    showSlide(slideIndex);
+  }
+
+  // tombol klik
+  if (next) next.addEventListener("click", nextSlide);
+  if (prev) prev.addEventListener("click", prevSlide);
+
+  // autoplay khusus video: setelah selesai lanjut
+  slides.forEach((slide) => {
+    if (slide.tagName === "VIDEO") {
+      slide.addEventListener("ended", nextSlide);
+    }
+  });
+
+  // tampilkan slide pertama
+  showSlide(slideIndex);
+});
+</script>
+
+<!-- 🔹 Feature Row 3 -->
+<div class="feature-row">
+  <!-- Geser visual ke depan -->
   <div class="feature-visual slider glass">
     <div class="slides">
-      <img src="images/DARC_STUDIO.png" alt="Slide 1" class="active">
-      <img src="images/DARC Water Cool.png" alt="Slide 2">
-      <img src="images/BG2.png" alt="Slide 3">
-      <img src="images/templatemo-neural-01.jpg" alt="Slide 4">
+      <img src="images/Design_3D_1.png" alt="Slide 1" class="active">
+      <img src="images/Design_3D_2.png" alt="Slide 2">
+      <img src="images/Design_3D_3.png" alt="Slide 3">
+      <img src="images/Design_3D_4.png" alt="Slide 4">
     </div>
     <a class="prev">&#10094;</a>
     <a class="next">&#10095;</a>
     <div class="dots"></div>
   </div>
-</div>
 
-<!-- 🔹 Feature Row 3 -->
-<div class="feature-row">
+  <!-- Teks di kanan -->
   <div class="feature-content">
     <div class="feature-icon">🏡</div>
     <h3>3D Design / Modelling</h3>
     <p>Kami tidak hanya mendesain sebuah produk ataupun individu, tetapi kami juga membuat iklan dari desain 3D yang sudah kami buat.</p>
   </div>
-
-  <div class="feature-visual slider glass">
-    <div class="slides">
-      <img src="images/DARC_STUDIO.png" alt="Slide 1" class="active">
-      <img src="images/DARC Water Cool.png" alt="Slide 2">
-      <img src="images/BG2.png" alt="Slide 3">
-      <img src="images/templatemo-neural-01.jpg" alt="Slide 4">
-    </div>
-    <a class="prev">&#10094;</a>
-    <a class="next">&#10095;</a>
-    <div class="dots"></div>
-  </div>
 </div>
+
+
 
 <!-- 🔹 Feature Row 4 -->
 <div class="feature-row">
+  <!-- Pindahkan visual ke kiri -->
+  <div class="feature-visual slider glass">
+    <div class="slides">
+      <img src="images/LRC_3D_1.png" alt="Slide 1" class="active">
+      <img src="images/LRC_3D_2.png" alt="Slide 2">
+      <img src="images/LRC_3D_3.png" alt="Slide 3">
+      <img src="images/LRC_3D_4.png" alt="Slide 4">
+    </div>
+    <a class="prev">&#10094;</a>
+    <a class="next">&#10095;</a>
+    <div class="dots"></div>
+  </div>
+
+  <!-- Text di kanan -->
   <div class="feature-content">
     <div class="feature-icon">🔦</div>
     <h3>3D Lighting, Render and Compositing</h3>
-    <p>LRC biasa disebut dengan Finishing, kami sering mendapat project untuk hal ini dikarenakan untuk melakukan tahap finishing ini membutuhkan spek komputer yang tinggi, dan kami bisa melayani juga untuk pada tahap ini.</p>
+    <p>
+      LRC biasa disebut dengan Finishing, kami sering mendapat project untuk hal ini
+      dikarenakan untuk melakukan tahap finishing ini membutuhkan spek komputer yang tinggi,
+      dan kami bisa melayani juga untuk pada tahap ini.
+    </p>
   </div>
+</div>
 
+
+<!-- 🔹 Feature Row 5 -->
+<div class="feature-row">
+  <!-- Geser visual ke depan -->
   <div class="feature-visual slider glass">
     <div class="slides">
       <img src="images/DARC_STUDIO.png" alt="Slide 1" class="active">
@@ -189,26 +265,12 @@ Perkenalkan Kami Darc perusahaan kecil yang dibangun dari personal seorang freel
     <a class="next">&#10095;</a>
     <div class="dots"></div>
   </div>
-</div>
 
-<!-- 🔹 Feature Row 5 -->
-<div class="feature-row">
+  <!-- Teks di kanan -->
   <div class="feature-content">
     <div class="feature-icon">💡</div>
     <h3>Creative Advertising</h3>
     <p>Kami menyediakan konsep iklan kreatif dengan visual modern dan futuristik untuk berbagai kebutuhan brand.</p>
-  </div>
-
-  <div class="feature-visual slider glass">
-    <div class="slides">
-      <img src="images/DARC_STUDIO.png" alt="Slide 1" class="active">
-      <img src="images/DARC Water Cool.png" alt="Slide 2">
-      <img src="images/BG2.png" alt="Slide 3">
-      <img src="images/templatemo-neural-01.jpg" alt="Slide 4">
-    </div>
-    <a class="prev">&#10094;</a>
-    <a class="next">&#10095;</a>
-    <div class="dots"></div>
   </div>
 </div>
   </div>
@@ -338,7 +400,7 @@ Perkenalkan Kami Darc perusahaan kecil yang dibangun dari personal seorang freel
       <p>
         Hubungi <a href="mailto:zidanerendy0@gmail.com">zidanerendy0@gmail.com</a> 
         atau <a href="tel:0895396133796">0895396133796</a><br>
-        untuk mendapatkan informasi selengkapnya mengenai project 
+        bisa juga membuka profil instagram kami untuk mendapatkan informasi selengkapnya mengenai project
         yang ingin anda buat bersama kami.
       </p>
       <div class="social-links">
@@ -502,5 +564,4 @@ document.querySelectorAll('.feature-visual.slider').forEach((slider) => {
 });
 </script>
 </body>
-
 </html>
